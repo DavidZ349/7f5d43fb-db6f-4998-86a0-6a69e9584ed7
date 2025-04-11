@@ -3,6 +3,7 @@ import { useState } from 'react';
 function Square({ value }) {
   const [value, setValue] = useState(null);
   function handleClick() {
+    setValue('X');
     console.log('clicked!');
   }
 
