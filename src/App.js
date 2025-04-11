@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Square({value, onSquareClick}) {
+function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
       {value}
@@ -9,10 +9,6 @@ function Square({value, onSquareClick}) {
 }
 
 function Board({ xIsNext, squares, onPlay }) {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const currentSquares = history[history.length - 1];
-
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -62,15 +58,14 @@ export default function Game() {
   const currentSquares = history[history.length - 1];
 
   function handlePlay(nextSquares) {
-    // TODO
+    setHistory([...history, nextSquares]);
+    setXIsNext(!xIsNext);
   }
-
 
   return (
     <div className="game">
       <div className="game-board">
-      <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-        <Board />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
         <ol>{/*TODO*/}</ol>
@@ -78,7 +73,6 @@ export default function Game() {
     </div>
   );
 }
-
 
 function calculateWinner(squares) {
   const lines = [
